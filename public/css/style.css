@@ -1,4 +1,15 @@
 @font-face {
+  font-family: "YekanBakh";
+  src: url("../fonts/YekanBakh-Bold.eot");
+  src: url("../fonts/YekanBakh-Bold.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/YekanBakh-Bold.woff2") format("woff2"),
+    url("../fonts/YekanBakh-Bold.woff") format("woff"),
+    url("../fonts/YekanBakh-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
     font-family: "vazir";
     src: url("../fonts/Vazir.eot");
     src: url("../fonts/Vazir.eot?#iefix") format("embedded-opentype"),
@@ -33,6 +44,7 @@
     font-style: normal;
     font-display: swap;
   }
+ 
   
   body {
     margin: 0;
@@ -43,5 +55,35 @@
   
   .MuiCard-root::-webkit-scrollbar {
     display: none;
+  }
+  
+  .pulse {
+    width: 170px;
+    height: 50px;
+    border-radius: 8px;
+    background: rgb(0, 170, 179);
+    cursor: pointer;
+    animation: pulse 2s infinite;
+  }
+  
+  @-webkit-keyframes pulse {
+    0% {
+      -webkit-box-shadow: 0 0 0 0px rgba(0, 170, 179, 0.5);
+    }
+  
+    100% {
+      -webkit-box-shadow: 0 0 0 11px rgba(0, 0, 0, 0);
+    }
+  }
+  @keyframes pulse {
+    0% {
+      -moz-box-shadow: 0 0 0 0px rgba(0, 170, 179, 0.5);
+      box-shadow: 0 0 0 0px rgba(0, 170, 179, 0.5);
+    }
+  
+    100% {
+      -moz-box-shadow: 0 0 0 11px rgba(0, 0, 0, 0);
+      box-shadow: 0 0 0 11px rgba(0, 0, 0, 0);
+    }
   }
   

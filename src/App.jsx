@@ -1,10 +1,16 @@
-import "./App.css";
+import Header from "./components/Header";
+import MainLayout from "./layouts/MainLayout";
+import MainHeader from "./components/MainHeader";
+
 const App = () => {
   return (
     <>
-    <h1>hello</h1>
+      <MainLayout>
+        <Header />
+        <MainHeader />
+      </MainLayout>
     </>
-  )
+  );
 };
 
 export default App;
