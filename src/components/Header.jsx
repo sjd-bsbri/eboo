@@ -63,20 +63,27 @@ const Header = () => {
       <AppBar
         position="static"
         sx={{
+          px:2,py:1,
           backgroundColor: "#FCFCFC",
-          boxShadow: "none",
-          zIndex: 1,
-
-          [theme.breakpoints.down("940")]: {
-            ".links": {
-              display: "none",
-            },
-          },
+          
           [theme.breakpoints.up("940")]: {
             ".Fab": {
               display: "none",
             },
+            ".person": {
+              display: "none",
+            },
           },
+          [theme.breakpoints.down("940")]: {
+            ".links": {
+              display: "none",
+            },
+            ".Button1": { border: "none", p: 0 },
+            ".Button2": { border: "none", p: 0, m: 0 },
+            ".typoBtn2": { fontSize: "0.7rem" },
+          },
+          
+         
           [theme.breakpoints.down("sm")]: {
             ".Button1": {
               padding: 0,
@@ -89,12 +96,14 @@ const Header = () => {
             },
             ".box": { mr: 1 },
             ".iconBtn2": { fontSize: "0.8rem", mt: 0.5 },
-            ".typoBtn2": { fontSize: "0.7rem" },
+
             ".arrowBtn2": { fontSize: "0.9rem" },
-            ".typo": { fontSize: "0.9rem" },
+            ".typo": { fontSize: "0.8rem",p:0 },
             ".fabIcon": {
               fontSize: "1.2rem",
+              m:0
             },
+            ".Fab":{m:0},
             ".bellIcon": { height: "1.4rem" },
             ".badge": { size: "small" },
           },
@@ -159,7 +168,7 @@ const Header = () => {
                 },
               }}
             >
-              خانه
+<Typography variant="caption">خانه</Typography>              
             </Link>
             <Link
               id="basic-button"
@@ -174,6 +183,7 @@ const Header = () => {
               color="text.primary"
               sx={{
                 px: 8,
+                display:"flex",
 
                 "&.MuiLink-root": {
                   fontSize: "0.7rem",
@@ -187,14 +197,14 @@ const Header = () => {
               <AiOutlineAppstore
                 style={{ verticalAlign: "middle", fontSize: "small" }}
               />
-              خدمات
+<Typography variant="caption">خدمات</Typography>              
               <KeyboardArrowDownRounded
-                sx={{ fontSize: 20, verticalAlign: "middle" }}
+                sx={{ fontSize: 20 }}
               />
             </Link>
             <Menu
               sx={{
-                "& .MuiMenu-paper": { borderRadius: "0 0 20px 20px", p: 2 },
+                "& .MuiMenu-paper": { borderRadius: "0 0 20px 20px", px:3.5 ,py:2 },
               }}
               elevation={3}
               anchorOrigin={{
@@ -218,34 +228,54 @@ const Header = () => {
                 <Typography sx={{ ml: 0.5 }}> خدمات</Typography>
               </Box>
 
-              <Divider variant="middle" />
+              <Divider variant="fullWidth" />
               <MenuItem
                 disableRipple
                 onClick={handleClose}
                 sx={{ pt: 2, ":hover": { background: "none" } }}
               >
-                <Typography variant="caption">خدمات تایپ</Typography>
+                <Typography
+                  variant="caption"
+                  sx={{ ":hover": { color: "primary.main" } }}
+                >
+                  خدمات تایپ
+                </Typography>
               </MenuItem>
               <MenuItem
                 disableRipple
                 onClick={handleClose}
                 sx={{ ":hover": { background: "none" } }}
               >
-                <Typography variant="caption">خدمات ترجمه</Typography>
+                <Typography
+                  variant="caption"
+                  sx={{ ":hover": { color: "primary.main" } }}
+                >
+                  خدمات ترجمه
+                </Typography>
               </MenuItem>
               <MenuItem
                 disableRipple
                 onClick={handleClose}
                 sx={{ ":hover": { background: "none" } }}
               >
-                <Typography variant="caption">خدمات پاورپوینت</Typography>
+                <Typography
+                  variant="caption"
+                  sx={{ ":hover": { color: "primary.main" } }}
+                >
+                  خدمات پاورپوینت
+                </Typography>
               </MenuItem>
               <MenuItem
                 disableRipple
                 onClick={handleClose}
                 sx={{ ":hover": { background: "none" } }}
               >
-                <Typography variant="caption">خدمات ویراستاری</Typography>
+                <Typography
+                  variant="caption"
+                  sx={{ ":hover": { color: "primary.main" } }}
+                >
+                  خدمات ویراستاری
+                </Typography>
               </MenuItem>
             </Menu>
 
@@ -265,7 +295,7 @@ const Header = () => {
                 pr: 8,
               }}
             >
-              تعرفه قیمت ها
+<Typography variant="caption">تعرفه قیمت ها</Typography>              
             </Link>
 
             <Link
@@ -284,7 +314,7 @@ const Header = () => {
                 },
               }}
             >
-              تماس با ما
+<Typography variant="caption">تماس با ما</Typography>              
             </Link>
           </Box>
 
@@ -313,6 +343,10 @@ const Header = () => {
                   },
                 }}
               >
+                <PersonOutlineRounded
+                  className="person"
+                  sx={{ fontSize: 22, mb: 0.9 }}
+                />
                 <Typography variant="caption">ورود / ثبت نام</Typography>
               </Button>
             ) : (

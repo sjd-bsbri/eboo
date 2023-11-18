@@ -103,19 +103,12 @@ const MainHeader = () => {
                 <Typography
                   variant="caption"
                   color="#bdc3c7"
-                  sx={{ position: "absolute", left: "11.25rem" }}
+                  sx={{ position: "absolute", right: "2rem" }}
                 >
                   جهت آزمایش ميتوانيد 1 صفحه رايگان تبديل کنيد
                 </Typography>
               </Card>
-              <Typography
-                className="Card"
-                variant="caption"
-                color="#CECECE"
-                sx={{ position: "relative", top: "3rem", left: "2rem" }}
-              >
-                فایلهای خود را بکشید و اینجا رها کنید
-              </Typography>
+             
             </>
           )}
         </Box>
