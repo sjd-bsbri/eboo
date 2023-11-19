@@ -5,8 +5,8 @@ import PulseButtonHeader from "./PulseButtonHeader";
 import IconCountUpHeader from "./IconCountUpHeader";
 import DividerCountUpHeader from "./DividerCountUpHeader";
 const MainHeader = () => {
-  const btn = useMediaQuery(theme.breakpoints.down("940"));
-  const resCountup = useMediaQuery(theme.breakpoints.down("940"));
+  const btn = useMediaQuery(theme.breakpoints.down("md"));
+  const resCountup = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <>
@@ -19,7 +19,7 @@ const MainHeader = () => {
           flexDirection: "column",
           justifyContent: "space-around",
           alignItems: "center",
-          [theme.breakpoints.down("940")]: {
+          [theme.breakpoints.down("md")]: {
             ".Card": {
               display: "none",
             },

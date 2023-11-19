@@ -22,11 +22,13 @@ export const theme = createTheme({
   Link: {
     fontFamily: "YekanBakh,vazir, Tanha, roboto",
   },
-  breackpoints: {
-    xs: 0,
-    sm: 600,
-    md: 900,
-    lg: 1200,
-    xl: 1536,
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 940,
+      lg: 1200,
+      xl: 1536,
+    },
   },
 });

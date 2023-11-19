@@ -51,7 +51,7 @@ const Header = () => {
   const handleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
-  const isMdUp = useMediaQuery(theme.breakpoints.up("940"));
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   useEffect(() => {
     if (isMdUp) {
       setDrawerOpen(false);
@@ -66,7 +66,7 @@ const Header = () => {
           px:2,py:1,
           backgroundColor: "#FCFCFC",
           
-          [theme.breakpoints.up("940")]: {
+          [theme.breakpoints.up("md")]: {
             ".Fab": {
               display: "none",
             },
@@ -74,7 +74,7 @@ const Header = () => {
               display: "none",
             },
           },
-          [theme.breakpoints.down("940")]: {
+          [theme.breakpoints.down("md")]: {
             ".links": {
               display: "none",
             },
@@ -110,6 +110,7 @@ const Header = () => {
         }}
       >
         <Toolbar
+        
           disableGutters
           sx={{
             display: "flex",
