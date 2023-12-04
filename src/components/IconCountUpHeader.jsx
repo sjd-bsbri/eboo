@@ -1,6 +1,7 @@
 import { FiberManualRecord } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
-import CountUp from 'react-countup';
+// import CountUp from "react-countup";
+import CustomNumeralNumericFormat from "../helpers/PersianNumber";
 
 const IconCountUpHeader = () => {
   return (
@@ -12,16 +13,21 @@ const IconCountUpHeader = () => {
 
         display: "flex",
         justifyContent: "space-around",
-        alignItems:"center"
+        alignItems: "center",
       }}
     >
       <Box className="box" sx={{ display: "flex" }}>
-        <CountUp
+        {/* <CountUp
           className="typo"
           start={0}
           end={7000}
           duration={1}
           style={{ fontSize: 14 }}
+        /> */}
+        <CustomNumeralNumericFormat
+        className="typo"
+          value={4321}
+          style={{ fontSize: 14, fontFamily: "YekanBakh",color:"#222831" }}
         />
 
         <Typography
@@ -35,16 +41,21 @@ const IconCountUpHeader = () => {
       </Box>
       <FiberManualRecord
         className="dot"
-        sx={{ fontSize: 10, color: "#666AF6",mb:1 }}
+        sx={{ fontSize: 10, color: "#666AF6", mb: 1 }}
       />
 
       <Box className="box" sx={{ display: "flex" }}>
-        <CountUp
+        {/* <CountUp
           className="typo"
           start={0}
           end={12000}
           duration={1}
           style={{ fontSize: 14 }}
+        /> */}
+        <CustomNumeralNumericFormat
+        className="typo"
+          value={4321}
+          style={{ fontSize: 14, fontFamily: "YekanBakh",color:"#222831" }}
         />
 
         <Typography
@@ -58,16 +69,22 @@ const IconCountUpHeader = () => {
       </Box>
       <FiberManualRecord
         className="dot"
-        sx={{ fontSize: 10, color: "#666AF6",mb:1 }}
+        sx={{ fontSize: 10, color: "#666AF6", mb: 1 }}
       />
 
       <Box className="box" sx={{ display: "flex" }}>
-        <CountUp
+        {/* <CountUp
           className="typo"
           start={0}
           end={1}
           duration={1}
           style={{ fontSize: 14 }}
+        /> */}
+
+<CustomNumeralNumericFormat
+        className="typo"
+          value={4321}
+          style={{ fontSize: 14, fontFamily: "YekanBakh",color:"#222831" }}
         />
 
         <Typography

@@ -72,7 +72,7 @@ const MainHeader = () => {
                 color="#444"
                 sx={{ fontSize: "16px", mt: "4rem", mb: "1rem" }}
               >
-                جهت آزمایش ميتوانيد 1 صفحه رايگان تبديل کنيد
+                جهت آزمایش ميتوانيد یک صفحه رايگان تبديل کنيد
               </Typography>
               <PulseButtonHeader />
             </Box>
@@ -105,10 +105,9 @@ const MainHeader = () => {
                   color="#bdc3c7"
                   sx={{ position: "absolute", right: "2rem" }}
                 >
-                  جهت آزمایش ميتوانيد 1 صفحه رايگان تبديل کنيد
+                  جهت آزمایش ميتوانيد یک صفحه رايگان تبديل کنيد
                 </Typography>
               </Card>
-             
             </>
           )}
         </Box>

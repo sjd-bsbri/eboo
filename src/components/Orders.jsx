@@ -6,7 +6,7 @@ import { theme } from "../layouts/theme/theme";
 const Orders = () => {
   return (
     <>
-      <Box sx={{ backgroundColor: "#FCFCFC", height: "100vh" }}>
+      <Box sx={{ backgroundColor: "#FCFCFC", pb:"4rem" }}>
         <Typography
           sx={{
             fontSize: "26px",

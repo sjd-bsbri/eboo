@@ -1,5 +1,6 @@
 import { Box, Divider, Typography } from "@mui/material";
-import CountUp from 'react-countup';
+// import CountUp from 'react-countup';
+import CustomNumeralNumericFormat from "../helpers/PersianNumber";
 
 const DividerCountUpHeader = () => {
   return (
@@ -8,18 +9,23 @@ const DividerCountUpHeader = () => {
       sx={{
         mb: -15,
         width: "50%",
-        backgroundColor:"#FCFCFC",
+        backgroundColor: "#FCFCFC",
         display: "flex",
         justifyContent: "space-around",
       }}
     >
       <Box className="box" sx={{ display: "flex" }}>
-        <CountUp
+        {/* <CountUp
           className="typo"
           start={0}
           end={7000}
           duration={1}
           style={{ fontSize: 14 }}
+        /> */}
+        <CustomNumeralNumericFormat
+          className="typo"
+          value={4321}
+          style={{ fontSize: 14, fontFamily: "YekanBakh", color: "#222831" }}
         />
 
         <Typography
@@ -31,19 +37,24 @@ const DividerCountUpHeader = () => {
           کاربر عضو شده
         </Typography>
       </Box>
-      <Divider 
+      <Divider
         sx={{
           "&.MuiDivider-root": { borderColor: "#E9E9E9", borderWidth: 0.1 },
         }}
       />
 
       <Box className="box" sx={{ display: "flex" }}>
-        <CountUp
+        {/* <CountUp
           className="typo"
           start={0}
           end={12000}
           duration={1}
           style={{ fontSize: 14 }}
+        /> */}
+        <CustomNumeralNumericFormat
+          className="typo"
+          value={4321}
+          style={{ fontSize: 14, fontFamily: "YekanBakh", color: "#222831" }}
         />
 
         <Typography
@@ -62,12 +73,17 @@ const DividerCountUpHeader = () => {
       />
 
       <Box className="box" sx={{ display: "flex" }}>
-        <CountUp
+        {/* <CountUp
           className="typo"
           start={0}
           end={1}
           duration={1}
           style={{ fontSize: 14 }}
+        /> */}
+        <CustomNumeralNumericFormat
+          className="typo"
+          value={4321}
+          style={{ fontSize: 14, fontFamily: "YekanBakh", color: "#222831" }}
         />
 
         <Typography

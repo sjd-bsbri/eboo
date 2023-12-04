@@ -9,6 +9,7 @@ import {
   BsFillStarFill,
 } from "react-icons/bs";
 import { theme } from "../layouts/theme/theme";
+import CustomNumeralNumericFormat from "../helpers/PersianNumber";
 
 const SiteSpecifications = () => {
   return (
@@ -91,7 +92,11 @@ const SiteSpecifications = () => {
               color="#5d647b"
               gutterBottom
             >
-              99% دقت تشخیص
+              <CustomNumeralNumericFormat
+                value={99}
+                style={{ fontSize: "0.9rem", fontFamily: "YekanBakh" }}
+              />
+              % دقت تشخیص
             </Typography>
             <Typography
               fontSize="14px"
@@ -167,7 +172,11 @@ const SiteSpecifications = () => {
               color="#5d647b"
               gutterBottom
             >
-              4 روش هوشمند
+              <CustomNumeralNumericFormat
+                value={4}
+                style={{ fontSize: "0.9rem", fontFamily: "YekanBakh" }}
+              />
+              {" "} روش هوشمند
             </Typography>
             <Typography
               fontSize="14px"
@@ -175,7 +184,11 @@ const SiteSpecifications = () => {
               textAlign="left"
               sx={{ margin: "5px 0px 20px" }}
             >
-              بدلیل تفاوت در ساختار فایلها ما 4 روش تبدیل کاملا هوشمند در اختیار
+              
+              بدلیل تفاوت در ساختار فایلها ما <CustomNumeralNumericFormat
+                value={4}
+                style={{ fontSize: "14px", fontFamily: "YekanBakh" }}
+              /> روش تبدیل کاملا هوشمند در اختیار
               شما قرار می دهیم.
             </Typography>
           </Box>

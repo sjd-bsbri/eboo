@@ -3,7 +3,8 @@ import MainLayout from "./layouts/MainLayout";
 import MainHeader from "./components/MainHeader";
 import SiteSpecifications from "./components/SiteSpecifications";
 import Orders from "./components/Orders";
-import Conversion from "./components/Conversion";
+import BrainDescriptions from "./components/BrainDescriptions";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
         <MainHeader />
         <SiteSpecifications />
         <Orders />
-        <Conversion />
+        <BrainDescriptions />
+        <Footer />
       </MainLayout>
     </>
   );

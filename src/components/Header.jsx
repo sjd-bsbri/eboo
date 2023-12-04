@@ -204,6 +204,7 @@ const Header = () => {
               />
             </Link>
             <Menu
+            
               sx={{
                 "& .MuiMenu-paper": { borderRadius: "0 0 20px 20px", px:3.5 ,py:2 },
               }}
@@ -230,7 +231,9 @@ const Header = () => {
               </Box>
 
               <Divider variant="fullWidth" />
+              
               <MenuItem
+            
                 disableRipple
                 onClick={handleClose}
                 sx={{ pt: 2, ":hover": { background: "none" } }}
