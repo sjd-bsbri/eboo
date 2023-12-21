@@ -5,6 +5,8 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import { theme } from "./theme/theme";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const cacheRTL = createCache({
   key: "muirtl",
@@ -19,8 +21,10 @@ const MainLayout = ({children}) => {
           <Helmet>
             <title>کافی نت آنلاین</title>
           </Helmet>
+          <Header/>
           {/* Grid System */}
           {children}
+          <Footer/>
         </HelmetProvider>
       </ThemeProvider>
     </CacheProvider>
