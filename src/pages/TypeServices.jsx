@@ -2,20 +2,24 @@ import {
   Box,
   Divider,
   Typography,
-  // FormControl,
-  // InputLabel,
-  // Select,
   Checkbox,
   Button,
-  TextareaAutosize,
   TextField,
+  TextareaAutosize,
 } from "@mui/material";
 
 import Grid from "@mui/material/Unstable_Grid2";
-import { SiSlack } from "react-icons/si";
-import { BsAward, BsCashCoin, BsDot, BsHeadset, BsPlus } from "react-icons/bs";
+import {
+  BsAward,
+  BsCashCoin,
+  BsDot,
+  BsHeadset,
+  BsPlus,
+  BsSlack,
+} from "react-icons/bs";
 import { typeServicesInput } from "../constants/typeServicesInput";
 import styled from "@emotion/styled";
+import { theme } from "../layouts/theme/theme";
 
 const TypeServices = () => {
   const VisuallyHiddenInput1 = styled("input")({
@@ -32,24 +36,61 @@ const TypeServices = () => {
 
   return (
     <>
-      <Box sx={{ backgroundColor: "#FCFCFC", minHeight: "100vh" }}>
-        <Box sx={{ p: "0 3rem", borderRadius: "20px" }}>
+      <Box
+        sx={{
+          backgroundColor: "#FCFCFC",
+          minHeight: "100vh",
+          [theme.breakpoints.down("lg")]: {
+            ".grid1": { m: "70px 0 0", pr: "100px" },
+            ".grid2": { m: "70px 0 0" },
+          },
+          [theme.breakpoints.down("md")]: {
+            ".grid1": { pr: 0, m: "10px 0 0" },
+            ".boxPad1": { p: "0 1rem" },
+            ".texBoxTypeService": { textAlign: "center",  },
+            ".typo": { fontSize: "16px" },
+            ".typeDivider": { display: "block" },
+            ".justifyPurple": { justifyContent: "center" },
+            ".infos": { display: "none" },
+            ".grid2": { m: 0, p: 0 },
+            ".typeDivider2": { "&.MuiDivider-root::before": { width: "100%" } },
+            ".boxBtn": { textAlign: "center", mt: "35px" },
+            ".btn": { width: "100%", height: "55px" },
+          },
+          [theme.breakpoints.down("sm")]: {
+            ".typoPurple": { fontSize: "14px" },
+            ".typoCheck": { fontSize: "12px" },
+            ".typoCheckBlue": { fontSize: "13px" },
+            ".typo": { fontSize: "13px" },
+          },
+        }}
+      >
+        <Box className="boxPad1" sx={{ p: "0 3rem", borderRadius: "20px" }}>
           <Grid container sx={{ display: "flex", height: "100%" }}>
             <Grid
+              className="grid1"
               xs={12}
               sm={12}
               md={6}
               lg={6}
               xl={6}
-              sx={{ m: "130px 0 0", pr: "150px", textAlign: "center" }}
+              sx={{
+                m: "130px 0 0",
+                pr: "150px",
+                textAlign: "center",
+              }}
             >
-              <Box sx={{ textAlign: "left", p: 0 }}>
+              <Box
+                className="texBoxTypeService"
+                sx={{ textAlign: "left", p: 0 }}
+              >
                 <Typography
                   sx={{ fontSize: "40px", color: "#0c0c0c", mb: "20px" }}
                 >
                   سفارش تایپ
                 </Typography>
                 <Divider
+                  className="typeDivider"
                   sx={{
                     display: "none",
                     m: "20px 0",
@@ -58,6 +99,7 @@ const TypeServices = () => {
                   }}
                 />
                 <Typography
+                  className="typo"
                   sx={{
                     m: "10px 0 20px",
                     color: "#303030",
@@ -85,24 +127,19 @@ const TypeServices = () => {
                   textAlign: "left",
                   mt: "30px",
                   display: "flex",
+                  alignItems: "center",
                 }}
+                className="justifyPurple"
               >
-                <SiSlack
+                <BsSlack
                   style={{
                     fontSize: "22px",
                     color: "#a63489",
-                    textAlign: "left",
                   }}
                 />
-                <Box
-                  sx={{
-                    ml: "10px",
-                    color: "#a63489",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
+                <Box sx={{ display: "flex", ml: "10px" }}>
                   <Typography
+                    className="typoPurple"
                     sx={{
                       fontSize: "20px",
                       color: "#a63489",
@@ -113,6 +150,7 @@ const TypeServices = () => {
                   </Typography>
                   <BsDot style={{ fontSize: "20px", color: "#a63489" }} />
                   <Typography
+                    className="typoPurple"
                     sx={{
                       fontSize: "20px",
                       color: "#a63489",
@@ -123,7 +161,7 @@ const TypeServices = () => {
                   </Typography>
                 </Box>
               </Box>
-              <Box sx={{ textAlign: "left", mt: "30px" }}>
+              <Box sx={{ textAlign: "left", mt: "30px" }} className="infos">
                 <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                   <BsAward style={{ fontSize: "28px", color: "#c4c4c4" }} />
                   <Typography
@@ -153,6 +191,7 @@ const TypeServices = () => {
               </Box>
             </Grid>
             <Grid
+              className="grid2"
               xs={12}
               sm={12}
               md={6}
@@ -162,9 +201,13 @@ const TypeServices = () => {
             >
               <Box>
                 <Divider
+                  className="typeDivider2"
                   textAlign="left"
                   sx={{
-                    "&.MuiDivider-root::before": { width: 0 },
+                    "&.MuiDivider-root::before": {
+                      width: 0,
+                      borderTop: "thin solid #f0f0f1",
+                    },
                     "&.MuiDivider-root::after": {
                       borderTop: "thin solid #f0f0f1",
                     },
@@ -176,9 +219,9 @@ const TypeServices = () => {
                   </Typography>{" "}
                 </Divider>
               </Box>{" "}
-              <form autoComplete="off" style={{ mt: 1}}>
+              <form autoComplete="off" style={{ paddingTop: "15px" }}>
                 <TextField
-                defaultValue="انتخاب کنید"
+                  defaultValue="انتخاب کنید"
                   select
                   SelectProps={{
                     native: true,
@@ -189,12 +232,14 @@ const TypeServices = () => {
                     background: "#FFF",
                     color: "#000",
                     fontSize: "14px",
-                    "& .MuiInputBase-root":{fontSize:"14px",borderRadius:"8px"},
-                    "& .MuiFormLabel-root":{fontSize:"14px"},
-                    
+                    "& .MuiInputBase-root": {
+                      fontSize: "14px",
+                      borderRadius: "8px",
+                    },
+                    "& .MuiFormLabel-root": { fontSize: "14px" },
                   }}
                 >
-                  <option disabled >{"انتخاب کنید"} </option>
+                  <option disabled>{"انتخاب کنید"} </option>
                   {typeServicesInput.map((input, index) => (
                     <option
                       style={{ fontSize: "14px", color: "#000" }}
@@ -243,81 +288,84 @@ const TypeServices = () => {
                       <VisuallyHiddenInput1 type="file" multiple accept="*" />
                     </Box>
                   </Box>
-                  <Box sx={{ mt: "20px" }}>
-                    <TextareaAutosize
-                      placeholder="توضیحات تکمیلی برای ارائه به تایپیست"
-                      style={{
-                        height: "4rem",
-                        width: "95%",
-                        borderRadius: "5px",
-                        fontFamily: "YekanBakh",
-                        fontSize: "14px",
-                        padding: "12px 15px",
-                        border: "1px solid #ced4da",
-                        color: "#495057",
-                        resize: "vertical",
-                        overflow: "auto",
-                        lineHeight: 1.5,
-                        "&:focus": { borderColor: "red" },
+                </Box>
+                <Box sx={{ mt: "20px" }}>
+                  <TextareaAutosize
+                    placeholder="توضیحات تکمیلی برای ارائه به تایپیست"
+                    style={{
+                      height: "5rem",
+                      width: "100%",
+                      borderRadius: "5px",
+                      fontFamily: "YekanBakh",
+                      fontSize: "14px",
+                      padding: "12px 15px",
+                      border: "1px solid #ced4da",
+                      color: "#495057",
+                      resize: "vertical",
+                      overflow: "auto",
+                      lineHeight: 1.5,
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </Box>
+                <Box sx={{ mt: "20px", textAlign: "left" }}>
+                  <Box
+                    sx={{
+                      fontSize: "14px",
+                      display: "flex",
+                      alignItems: "center",
+                      mb: "10px",
+                    }}
+                  >
+                    <Checkbox
+                      required
+                      disableRipple
+                      size="10px"
+                      sx={{
+                        mr: "5px",
+                        p: 0,
+                        fontSize: "18px",
+                        "&.Mui-checked": {
+                          color: "#007bff",
+                        },
                       }}
                     />
-                  </Box>
-                  <Box sx={{ mt: "20px", textAlign: "left" }}>
-                    <Box
+                    <Typography
+                      className="typoCheck"
                       sx={{
                         fontSize: "14px",
-                        display: "flex",
-                        alignItems: "center",
-                        mb: "10px",
+                        color: "#212529",
+                        mr: "5px",
+                        mt: "3px",
                       }}
                     >
-                      <Checkbox
-                        required
-                        disableRipple
-                        size="10px"
-                        sx={{
-                          mr: "5px",
-                          p: 0,
-                          fontSize: "18px",
-                          "&.Mui-checked": {
-                            color: "#007bff",
-                          },
-                        }}
-                      />
-                      <Typography
-                        sx={{
-                          fontSize: "14px",
-                          color: "#212529",
-                          mr: "5px",
-                          mt: "3px",
-                        }}
-                      >
-                        قوانین و مقررات را خوانده و قبول دارم
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontSize: "15px",
-                          color: "#0275ff",
-                          cursor: "pointer",
-                          mt: "5px",
-                        }}
-                      >
-                        (مشاهده)
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box sx={{ textAlign: "right" }}>
-                    <Button
-                      variant="contained"
+                      قوانین و مقررات را خوانده و قبول دارم
+                    </Typography>
+                    <Typography
+                      className="typoCheckBlue"
                       sx={{
-                        color: "#FFF",
-                        borderRadius: "7px",
-                        width: "170px",
+                        fontSize: "15px",
+                        color: "#0275ff",
+                        cursor: "pointer",
+                        mt: "5px",
                       }}
                     >
-                      ثبت سفارش
-                    </Button>
+                      (مشاهده)
+                    </Typography>
                   </Box>
+                </Box>
+                <Box className="boxBtn" sx={{ textAlign: "right" }}>
+                  <Button
+                    className="btn"
+                    variant="contained"
+                    sx={{
+                      color: "#FFF",
+                      borderRadius: "7px",
+                      width: "170px",
+                    }}
+                  >
+                    ثبت سفارش
+                  </Button>
                 </Box>
               </form>
             </Grid>

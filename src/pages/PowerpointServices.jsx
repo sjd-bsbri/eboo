@@ -8,11 +8,17 @@ import {
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { SiSlack } from "react-icons/si";
-import { BsAward, BsCashCoin, BsHeadset, BsPlus } from "react-icons/bs";
+import {
+  BsAward,
+  BsCashCoin,
+  BsHeadset,
+  BsPlus,
+  BsSlack,
+} from "react-icons/bs";
 import { typeServicesInput } from "../constants/typeServicesInput";
 import styled from "@emotion/styled";
 import { powerpointServiceSubject } from "../constants/powerpointServiceSubject";
+import { theme } from "../layouts/theme/theme";
 
 const PowerpointServices = () => {
   const VisuallyHiddenInput1 = styled("input")({
@@ -28,10 +34,42 @@ const PowerpointServices = () => {
   });
   return (
     <>
-      <Box sx={{ backgroundColor: "#FCFCFC", minHeight: "100vh" }}>
-        <Box sx={{ p: "0 3rem", borderRadius: "20px" }}>
+      <Box
+        sx={{
+          backgroundColor: "#FCFCFC",
+          minHeight: "100vh",
+          [theme.breakpoints.down("lg")]: {
+            ".grid1": { m: "70px 0 0", pr: "100px" },
+            ".grid2": { m: "70px 0 0" },
+          },
+          [theme.breakpoints.down("md")]: {
+            ".grid1": { pr: 0, m: "10px 0 0" },
+            ".boxPad1": { p: "0 1rem" },
+            ".texBoxPowerpointService": { textAlign: "center",  },
+            ".typo": { fontSize: "16px" },
+            ".powerpointDivider": { display: "block" },
+            ".justifyPurple": { justifyContent: "center" },
+            ".infos": { display: "none" },
+            ".grid2": { m: 0, p: 0 },
+            ".powerpointDivider2": {
+              "&.MuiDivider-root::before": { width: "100%" },
+            },
+            ".boxBtn": { textAlign: "center", mt: "35px" },
+            ".btn": { width: "100%", height: "55px" },
+          },
+          [theme.breakpoints.down("sm")]: {
+            ".typoPurple": { fontSize: "14px" },
+            ".typoCheck": { fontSize: "12px" },
+            ".typoCheckBlue": { fontSize: "13px" },
+            ".typo": { fontSize: "13px" },
+
+          },
+        }}
+      >
+        <Box className="boxPad1" sx={{ p: "0 3rem", borderRadius: "20px" }}>
           <Grid container sx={{ display: "flex", height: "100%" }}>
             <Grid
+              className="grid1"
               xs={12}
               sm={12}
               md={6}
@@ -39,13 +77,17 @@ const PowerpointServices = () => {
               xl={6}
               sx={{ m: "130px 0 0", pr: "150px", textAlign: "center" }}
             >
-              <Box sx={{ textAlign: "left", p: 0 }}>
+              <Box
+                className="texBoxPowerpointService"
+                sx={{ textAlign: "left", p: 0 }}
+              >
                 <Typography
                   sx={{ fontSize: "40px", color: "#0c0c0c", mb: "20px" }}
                 >
                   سفارش پاورپوینت
                 </Typography>
                 <Divider
+                  className="powerpointDivider"
                   sx={{
                     display: "none",
                     m: "20px 0",
@@ -54,6 +96,7 @@ const PowerpointServices = () => {
                   }}
                 />
                 <Typography
+                  className="typo"
                   sx={{
                     m: "10px 0 20px",
                     color: "#303030",
@@ -78,9 +121,11 @@ const PowerpointServices = () => {
                   textAlign: "left",
                   mt: "30px",
                   display: "flex",
+                  alignItems: "center",
                 }}
+                className="justifyPurple"
               >
-                <SiSlack
+                <BsSlack
                   style={{
                     fontSize: "22px",
                     color: "#a63489",
@@ -88,12 +133,13 @@ const PowerpointServices = () => {
                   }}
                 />
                 <Typography
+                  className="typoPurple"
                   sx={{ fontSize: "20px", color: "#a63489", ml: "10px" }}
                 >
                   قیمت پس از ثبت سفارش توسط کارشناس اعلام خواهد شد
                 </Typography>
               </Box>
-              <Box sx={{ textAlign: "left", mt: "30px" }}>
+              <Box sx={{ textAlign: "left", mt: "30px" }} className="infos">
                 <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                   <BsAward style={{ fontSize: "28px", color: "#c4c4c4" }} />
                   <Typography
@@ -123,6 +169,7 @@ const PowerpointServices = () => {
               </Box>
             </Grid>
             <Grid
+              className="grid2"
               xs={12}
               sm={12}
               md={6}
@@ -132,9 +179,13 @@ const PowerpointServices = () => {
             >
               <Box>
                 <Divider
+                  className="powerpointDivider2"
                   textAlign="left"
                   sx={{
-                    "&.MuiDivider-root::before": { width: 0 },
+                    "&.MuiDivider-root::before": {
+                      width: 0,
+                      borderTop: "thin solid #f0f0f1",
+                    },
                     "&.MuiDivider-root::after": {
                       borderTop: "thin solid #f0f0f1",
                     },
@@ -146,7 +197,7 @@ const PowerpointServices = () => {
                   </Typography>{" "}
                 </Divider>
               </Box>{" "}
-              <form autoComplete="off" style={{ padding: "0 0 15px 15px" }}>
+              <form autoComplete="off" style={{ paddingTop: "15px" }}>
                 <Grid
                   container
                   sx={{
@@ -260,8 +311,8 @@ const PowerpointServices = () => {
                     <TextareaAutosize
                       placeholder="توضیحات تکمیلی برای ارائه به پیمانکار"
                       style={{
-                        height: "4rem",
-                        width: "95%",
+                        height: "5rem",
+                        width: "100%",
                         borderRadius: "5px",
                         fontFamily: "YekanBakh",
                         fontSize: "14px",
@@ -271,7 +322,7 @@ const PowerpointServices = () => {
                         resize: "vertical",
                         overflow: "auto",
                         lineHeight: 1.5,
-                        "&:focus": { borderColor: "red" },
+                        boxSizing: "border-box",
                       }}
                     />
                   </Box>
@@ -298,6 +349,7 @@ const PowerpointServices = () => {
                         }}
                       />
                       <Typography
+                        className="typoCheck"
                         sx={{
                           fontSize: "14px",
                           color: "#212529",
@@ -308,6 +360,7 @@ const PowerpointServices = () => {
                         قوانین و مقررات را خوانده و قبول دارم
                       </Typography>
                       <Typography
+                        className="typoCheckBlue"
                         sx={{
                           fontSize: "15px",
                           color: "#0275ff",
@@ -319,8 +372,9 @@ const PowerpointServices = () => {
                       </Typography>
                     </Box>
                   </Box>
-                  <Box sx={{ textAlign: "right" }}>
+                  <Box className="boxBtn" sx={{ textAlign: "right" }}>
                     <Button
+                      className="btn"
                       variant="contained"
                       sx={{
                         color: "#FFF",
