@@ -9,12 +9,18 @@ import {
   EditingServices,
   ContactUsServices,
 } from "../pages";
+import Dashboard from "../components/dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
     path: "/eboo",
     element: <App />,
     errorElement: <NotFound />,
+  },
+  {
+    path: "/eboo/dashboard",
+    element: <Dashboard />,
+    
   },
   {
     path: "/eboo/خدمات-تایپ",

@@ -2,18 +2,13 @@ import {
   Close,
   KeyboardArrowDownRounded,
   MenuOpenRounded,
-  PersonOutlineRounded,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-import { BsChatRightText, BsHouse, BsTools } from "react-icons/bs";
-import { SlNotebook } from "react-icons/sl";
-import { CiLogout } from "react-icons/ci";
+import { BsTools } from "react-icons/bs";
 import { AiOutlineAppstore } from "react-icons/ai";
-import { CiBellOn } from "react-icons/ci";
 import {
   AppBar,
-  Badge,
   Box,
   Button,
   Divider,
@@ -39,6 +34,7 @@ import { theme } from "../layouts/theme/theme";
 import ModalPriceForm from "./ModalPriceForm";
 import CustomNumeralNumericFormat from "../helpers/PersianNumber";
 import styled from "@emotion/styled";
+import LoginButtonHeader from "./LoginButtonHeader";
 
 const style = {
   position: "absolute",
@@ -60,27 +56,27 @@ const LinkRouterService = styled(Link)({
   textDecoration: "none",
   color: "#222831",
 });
-const LinkRouterTranslateService= styled(Link)({
+const LinkRouterTranslateService = styled(Link)({
   ":hover": {
     color: "#00ADB5",
   },
   textDecoration: "none",
   color: "#222831",
-})
-const LinkRouterPowerpointService= styled(Link)({
+});
+const LinkRouterPowerpointService = styled(Link)({
   ":hover": {
     color: "#00ADB5",
   },
   textDecoration: "none",
   color: "#222831",
-})
-const LinkRouterEditingService= styled(Link)({
+});
+const LinkRouterEditingService = styled(Link)({
   ":hover": {
     color: "#00ADB5",
   },
   textDecoration: "none",
   color: "#222831",
-})
+});
 const LinkRouterLogo = styled(Link)({
   textDecoration: "none",
 });
@@ -131,21 +127,11 @@ const Header = () => {
     setAnchorEl(null);
   };
 
-  const [anchorEl2, setAnchorEl2] = useState(null);
-  const open2 = Boolean(anchorEl2);
-  const handleClick2 = (event) => {
-    setAnchorEl2(event.currentTarget);
-  };
-  const handleClose2 = () => {
-    setAnchorEl2(null);
-  };
-
-  const [visible, setVisible] = useState(true);
-
   const [drawerOpen, setDrawerOpen] = useState(false);
   const handleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
+
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   useEffect(() => {
     if (isMdUp) {
@@ -170,41 +156,20 @@ const Header = () => {
             ".Fab": {
               display: "none",
             },
-            ".person": {
-              display: "none",
-            },
           },
           [theme.breakpoints.down("md")]: {
             ".links": {
               display: "none",
             },
-            ".Button1": { border: "none", p: 0 },
-            ".Button2": { border: "none", p: 0, m: 0 },
-            ".typoBtn2": { fontSize: "0.7rem" },
           },
 
           [theme.breakpoints.down("sm")]: {
-            ".Button1": {
-              padding: 0,
-              margin: 0,
-              mr: 1,
-            },
-            ".Button2": {
-              padding: 0,
-              margin: 0,
-            },
-            ".box": { mr: 1 },
-            ".iconBtn2": { fontSize: "0.8rem", mt: 0.5 },
-
-            ".arrowBtn2": { fontSize: "0.9rem" },
             ".typo": { fontSize: "0.8rem", p: 0 },
             ".fabIcon": {
               fontSize: "1.2rem",
               m: 0,
             },
             ".Fab": { m: 0 },
-            ".bellIcon": { height: "1.4rem" },
-            ".badge": { size: "small" },
           },
         }}
       >
@@ -570,127 +535,7 @@ const Header = () => {
             </LinkRouterHomeContactUs>
           </Box>
 
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-around",
-            }}
-          >
-            {visible ? (
-              <Button
-                className="Button1"
-                onClick={() => setVisible(false)}
-                size="large"
-                variant="outlined"
-                sx={{
-                  color: "text.primary",
-                  mr: 2,
-                  borderRadius: 2,
-                  borderColor: "black",
-                  "&.MuiButton-root": { backgroundColor: "transparent" },
-                  "&:hover": {
-                    backgroundColor: "primary.main",
-                    color: "background.default",
-                  },
-                }}
-              >
-                <PersonOutlineRounded
-                  className="person"
-                  sx={{ fontSize: 22, mb: 0.9 }}
-                />
-                <Typography variant="caption">ورود / ثبت نام</Typography>
-              </Button>
-            ) : (
-              <Box sx={{ mr: 3 }} className="box">
-                <Button
-                  className="Button2"
-                  size="medium"
-                  variant="outlined"
-                  sx={{
-                    color: "text.primary",
-                    mr: 1,
-                    borderRadius: 2,
-                    borderColor: "black",
-                    "&.MuiButton-root": { backgroundColor: "transparent" },
-                    "&:hover": {
-                      backgroundColor: "primary.main",
-                      color: "background.default",
-                    },
-                  }}
-                  id="basic-button2"
-                  aria-controls={open2 ? "basic-menu2" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open2 ? "true" : undefined}
-                  onClick={handleClick2}
-                >
-                  <PersonOutlineRounded
-                    className="iconBtn2"
-                    sx={{ fontSize: 25, mb: 0.9, mr: 0.3 }}
-                  />
-                  <Typography
-                    className="typoBtn2"
-                    sx={{ fontSize: 20, fontWeight: 700 }}
-                  >
-                    حساب کاربری
-                  </Typography>
-                  <KeyboardArrowDownRounded
-                    className="arrowBtn2"
-                    sx={{ fontSize: 20 }}
-                  />
-                </Button>
-                <Badge
-                  showZero
-                  badgeContent={0}
-                  color="primary"
-                  sx={{ "& .MuiBadge-badge": { top: 3 } }}
-                >
-                  <CiBellOn
-                    className="bellIcon"
-                    style={{
-                      fontSize: 33,
-                      verticalAlign: "middle",
-                      cursor: "pointer",
-                    }}
-                  />
-                </Badge>
-              </Box>
-            )}
-            <Menu
-              id="basic-menu2"
-              anchorEl={anchorEl2}
-              open={open2}
-              onClose={handleClose2}
-              MenuListProps={{
-                "aria-labelledby": "basic-button2",
-              }}
-            >
-              <MenuItem onClick={handleClose2}>
-                <Typography variant="caption" sx={{ color: "#393E46" }}>
-                  👋🏻 خوش آمدید
-                </Typography>
-              </MenuItem>
-              <Divider />
-              <MenuItem onClick={handleClose2}>
-                <BsHouse />
-                <Typography sx={{ ml: 1 }}>پروفایل کاربری</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleClose2}>
-                <SlNotebook />
-                <Typography sx={{ ml: 1 }}> سفارشات </Typography>
-              </MenuItem>
-              <MenuItem onClick={handleClose2}>
-                <BsChatRightText />
-                <Typography sx={{ ml: 1 }}> پیام ها </Typography>
-              </MenuItem>
-              <Divider />
-
-              <MenuItem onClick={handleClose2}>
-                <CiLogout />
-                <Typography sx={{ ml: 1 }}> خروج از حساب کاربری </Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
+          <LoginButtonHeader />
         </Toolbar>
         <Drawer
           variant="temporary"
