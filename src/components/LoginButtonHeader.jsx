@@ -1,8 +1,4 @@
-import {
-  BsChatRightText,
-  BsChevronRight,
-  BsHouse,
-} from "react-icons/bs";
+import { BsChatRightText, BsChevronRight, BsHouse } from "react-icons/bs";
 import { SlNotebook } from "react-icons/sl";
 import { CiLogout } from "react-icons/ci";
 import { CiBellOn } from "react-icons/ci";
@@ -26,49 +22,82 @@ import {
   KeyboardArrowDownRounded,
   PersonOutlineRounded,
 } from "@mui/icons-material";
-import {  useState } from "react";
+import { useState } from "react";
 import { theme } from "../layouts/theme/theme";
-import {  useFormik } from "formik";
-import {
-  loginValidationSchema,
-  
-} from "../validations/loginValidation";
+import { useFormik } from "formik";
+import { loginValidationSchema } from "../validations/loginValidation";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { useTimer } from "react-timer-hook";
 import { Link } from "react-router-dom";
- 
+
 function MyTimer({ expiryTimestamp }) {
   const time = new Date();
   time.setSeconds(time.getSeconds() + 120);
-    
-  const {
-    seconds,
-    minutes,
-    restart,
-    pause,
 
-   
-  } = useTimer({ expiryTimestamp, onExpire: () => {document.getElementById("seconds").style.display = "none";   pause(time)  ,  document.getElementById("resendCode").style.display = "block";
-} });
-
+  const { seconds, minutes, restart, pause } = useTimer({
+    expiryTimestamp,
+    onExpire: () => {
+      document.getElementById("seconds").style.display = "none";
+      pause(time),
+        (document.getElementById("resendCode").style.display = "block");
+    },
+  });
 
   return (
-    <Box  sx={{textAlign: 'center',mt:2,}}>
-      <Box id="seconds" >
-        <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",}}>
-        <Typography sx={{fontSize:"17px",mx:1}}>ارسال مجدد کد بعد از </Typography>   <Typography>{seconds.toString().padStart(2, "0")}:</Typography> <Typography>0{minutes} </Typography>
-      
+    <Box sx={{ textAlign: "center", mt: 2 }}>
+      <Box id="seconds">
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "17px",
+              mx: 1,
+              [theme.breakpoints.down("sm")]: { fontSize: "14px" },
+            }}
+          >
+            ارسال مجدد کد بعد از{" "}
+          </Typography>{" "}
+          <Typography
+            sx={{ [theme.breakpoints.down("sm")]: { fontSize: "15px" } }}
+          >
+            {seconds.toString().padStart(2, "0")}:
+          </Typography>{" "}
+          <Typography
+            sx={{ [theme.breakpoints.down("sm")]: { fontSize: "15px" } }}
+          >
+            0{minutes}{" "}
+          </Typography>
         </Box>
       </Box>
-      <Typography sx={{display:"none"}} id="resendCode"> <Button disableRipple variant="text" sx={{":hover":{background:"none",textDecoration:"underline",},textDecoration:"underline",textUnderlinePosition:"from-font"}} onClick={()=>{document.getElementById("seconds").style.display = "block"; document.getElementById("resendCode").style.display = "none";
-                   const time = new Date();
-                   time.setSeconds(time.getSeconds() + 120);  restart(time)
-                  }}>ارسال مجدد کد</Button> </Typography>
-
+      <Typography sx={{ display: "none" }} id="resendCode">
+        {" "}
+        <Button
+          disableRipple
+          variant="text"
+          sx={{
+            ":hover": { background: "none", textDecoration: "underline" },
+            textDecoration: "underline",
+            textUnderlinePosition: "from-font",
+          }}
+          onClick={() => {
+            document.getElementById("seconds").style.display = "block";
+            document.getElementById("resendCode").style.display = "none";
+            const time = new Date();
+            time.setSeconds(time.getSeconds() + 120);
+            restart(time);
+          }}
+        >
+          ارسال مجدد کد
+        </Button>{" "}
+      </Typography>
     </Box>
   );
 }
-
 
 const LoginButtonHeader = () => {
   const formik = useFormik({
@@ -79,16 +108,10 @@ const LoginButtonHeader = () => {
     onSubmit: (values) => {
       console.log("Form Values: ", values);
       closeDialog1();
-      
+
       openDialog2();
     },
   });
-
-  
- 
-  
-
-  
 
   const [anchorEl2, setAnchorEl2] = useState(null);
 
@@ -104,32 +127,19 @@ const LoginButtonHeader = () => {
     openDialog1();
   };
 
-  // const handleConfirm = () => {
-
-  //     closeDialog1();
-  //     openDialog2();
-
-  // };
   const handleBack = () => {
     closeDialog2();
     openDialog1();
   };
 
-  // const handleRegister = () => {
-  //   setIsLoggedIn(true);
-  //   closeDialog2();
-  //   closeDialog1();
-  // };
-
   const openDialog1 = () => {
     setIsDialog1Open(true);
   };
 
-  
   const openDialog2 = () => {
     setIsDialog2Open(true);
   };
-  
+
   const closeDialog1 = () => {
     setIsDialog1Open(false);
   };
@@ -142,43 +152,25 @@ const LoginButtonHeader = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
- 
+  const [otp, setOtp] = useState("");
 
- 
-    const [otp, setOtp] = useState('')
-  
-    const handleChange = (newValue) => {
-      setOtp(newValue)
+  const handleChange = (newValue) => {
+    setOtp(newValue);
+  };
+  const [disabled, setDisabled] = useState(true);
+
+  const handleComplete = (value) => {
+    if (value.length === 6) {
+      setDisabled(false);
+    } else if (value.length === 0) {
+      setDisabled(true);
     }
-    const [disabled, setDisabled] = useState(true);
+  };
 
-    
-    const handleComplete = (value) => {
-
-      if(value.length === 6){
-        setDisabled(false);
-      }else if(value.length === 0){
-        setDisabled(true);
-      }
-
-      
-      
-      
-       
-      
-      
-      
-    }
-    
-    const time = new Date();
+  const time = new Date();
   time.setSeconds(time.getSeconds() + 120);
-     
-
-  
-  
 
   return (
-  
     <Box
       sx={{
         display: "flex",
@@ -209,11 +201,9 @@ const LoginButtonHeader = () => {
           ".arrowBtn2": { fontSize: "0.9rem" },
           ".bellIcon": { height: "1.4rem" },
           ".badge": { size: "small" },
-            ".muiOtp" :{"& .MuiInputBase-input":{minWidth:"15px",p:0}}
         },
       }}
     >
-    
       {isLoggedIn ? (
         <Box sx={{ mr: 3 }} className="box">
           <Button
@@ -297,8 +287,6 @@ const LoginButtonHeader = () => {
         </>
       )}
 
-      {/* <Dialog1 /> */}
-
       <Dialog
         open={isDialog1Open}
         onClose={closeDialog1}
@@ -311,10 +299,10 @@ const LoginButtonHeader = () => {
             borderRadius: "12px",
             boxShadow: "none",
             p: "0px 15px",
-            maxWidth:"600px",
-            maxHeight:"calc(100% - 64px)",
-            width:"600px",
-            height:"400px"
+            maxWidth: "600px",
+            maxHeight: "calc(100% - 64px)",
+            width: "600px",
+            height: "400px",
           },
         }}
       >
@@ -348,32 +336,25 @@ const LoginButtonHeader = () => {
         </DialogTitle>
 
         <DialogContent
-          sx={{ p: "40px 20px", "&.MuiDialogContent-root": { pt: "40px", } }}
+          sx={{ p: "40px 20px", "&.MuiDialogContent-root": { pt: "40px" } }}
         >
           <DialogContentText
             sx={{ fontSize: "16px", mb: "20px", color: "#212529" }}
           >
-           شماره همراه خود را وارد نمایید :
+            شماره همراه خود را وارد نمایید :
           </DialogContentText>
 
           <TextField
-            //  name="email"
             id="phone"
             name="phone"
             value={formik.values.phone}
             onChange={formik.handleChange}
-            error={
-              formik.touched.phone && Boolean(formik.errors.phone)
-            }
-            helperText={
-              formik.touched.phone && formik.errors.phone
-            }
+            error={formik.touched.phone && Boolean(formik.errors.phone)}
+            helperText={formik.touched.phone && formik.errors.phone}
             size="medium"
             autoFocus
             margin="dense"
-            // id="name"
             label="موبایل "
-            // type="email"
             fullWidth
             variant="outlined"
             sx={{
@@ -406,7 +387,6 @@ const LoginButtonHeader = () => {
           </DialogActions>
         </DialogContent>
       </Dialog>
-      {/* <Dialog2 /> */}
 
       <Dialog
         open={isDialog2Open}
@@ -472,118 +452,70 @@ const LoginButtonHeader = () => {
         <DialogContent
           sx={{ p: "40px 20px", "&.MuiDialogContent-root": { pt: "40px" } }}
         >
-          
-              {" "}
-              <Box >
-              <DialogContentText
-                sx={{
-                  fontSize: "16px",
-                  mb: "20px",
-                  color: "#212529",
-                  display: "flex",
-                  justifyContent:"center"
-                }}
-              >
-                کد تایید پیامک شده را وارد نمایید :
-                {"    "}{" "}
-                {/* <Typography
-                  onClick={handleBack}
-                  sx={{ fontSize: "15px", cursor: "pointer" }}
-                  color="primary"
-                >
-                  (تغییر)
-                </Typography> */}
-              </DialogContentText>
-
-
-
-              {/* <Box display="flex" flexDirection="row" > */}
-              {/* {values.map((value, index) => (
-        <TextField
-        sx={{mx:2}}
-          key={index}
-          value={value}
-          onChange={(event) => setValues(values.map((v, i) => i === index ? event.target.value : v))}
-          size="small"
-        />
-      ))} */}
-
-<MuiOtpInput   sx={{direction:"rtl","& .MuiTextField-root":{p:"3px"},[theme.breakpoints.down("sm")]:{"& .MuiInputBase-input":{minWidth:"15px",p:0}}}} rowGap={5} columnGap={5} TextFieldsProps={{  size: 'small', }} length={6}  value={otp} onChange={handleChange} onComplete={handleComplete} />
-    
-
-    {/* </Box> */}
-              {/* <TextField
-                //  name="email"
-               
-                id="phone"
-                name="phone"
-                size="medium"
-                autoFocus
-                margin="dense"
-                // id="name"
-                label="  تلفن همراه "
-                // type="email"
-                fullWidth
-                variant="outlined"
-                sx={{
-                  m: "10px 0",
-                  fontSize: "14px",
-                  "& .MuiInputLabel-root": {
-                    fontSize: "14px",
-                  },
-                  "& .MuiInputBase-root": {
-                    fontSize: "14px",
-                    borderRadius: "8px",
-                  },
-                }}
-              /> */}
-              <Typography
-                  onClick={handleBack}
-                  sx={{ fontSize: "15px",mt:3, cursor: "pointer",textDecoration:"underline",display:"flex",justifyContent:"center" }}
-                  color="primary"
-                >
-              تغییر شماره همراه
-                </Typography>
-
-                <MyTimer expiryTimestamp={time} />
-
-                
-            </Box>
-            <Link to={"/eboo/dashboard"} style={{textDecoration:"none"}}>
-            
-              
-          
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ mt: "30px", color: "#FFF" }}
-            type="submit"
-            disabled={disabled}
-
-          >
-            
-            ثبت نام
-          </Button>
-          </Link>
-          {/* <Box sx={{ textAlign: "center", mt: "10px" }}>
-            <Box
+          {" "}
+          <Box>
+            <DialogContentText
               sx={{
+                fontSize: "16px",
+                mb: "20px",
+                color: "#212529",
+                display: "flex",
+                justifyContent: "center",
+                [theme.breakpoints.down("sm")]: {
+                  fontSize: "14px",
+                },
+              }}
+            >
+              کد تایید پیامک شده را وارد نمایید :
+            </DialogContentText>
+
+            <MuiOtpInput
+              sx={{
+                direction: "rtl",
+                "& .MuiTextField-root": { p: "3px" },
+                [theme.breakpoints.down("sm")]: {
+                  "& .MuiInputBase-input": { minWidth: "16px", p: 0 },
+                  "& .MuiTextField-root": { mr: "-12px" },
+                },
+              }}
+              rowGap={5}
+              columnGap={5}
+              TextFieldsProps={{ size: "small" }}
+              length={6}
+              value={otp}
+              onChange={handleChange}
+              onComplete={handleComplete}
+            />
+
+            <Typography
+              onClick={handleBack}
+              sx={{
+                fontSize: "15px",
+                mt: 3,
                 cursor: "pointer",
+                textDecoration: "underline",
                 display: "flex",
                 justifyContent: "center",
               }}
+              color="primary"
             >
-              <BsBoxArrowInLeft
-                style={{ fontSize: "15px", color: "#212529" }}
-              />
-              <Typography
-                sx={{ ml: "5px", fontSize: "13px", color: "#212529" }}
-              >
-                قبلا عضو شدید؟ورود
-              </Typography>
-            </Box>
-          </Box> */}
+              تغییر شماره همراه
+            </Typography>
+
+            <MyTimer expiryTimestamp={time} />
+          </Box>
+          <Link to={"/eboo/dashboard"} style={{ textDecoration: "none" }}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              sx={{ mt: "30px", color: "#FFF" }}
+              type="submit"
+              disabled={disabled}
+            >
+              ثبت نام
+            </Button>
+          </Link>
         </DialogContent>
       </Dialog>
 
