@@ -17,6 +17,7 @@ const MainLayout = ({children}) => {
   return (
     <CacheProvider value={cacheRTL}>
       <ThemeProvider theme={theme}>
+
         <HelmetProvider>
           <Helmet>
             <title>کافی نت آنلاین</title>

@@ -6,6 +6,8 @@ import {
   Button,
   TextField,
   TextareaAutosize,
+  Modal,
+ 
 } from "@mui/material";
 
 import Grid from "@mui/material/Unstable_Grid2";
@@ -20,8 +22,120 @@ import {
 import { typeServicesInput } from "../constants/typeServicesInput";
 import styled from "@emotion/styled";
 import { theme } from "../layouts/theme/theme";
+import { useFormik } from "formik";
+import axios from "axios";
+import { useState } from "react";
 
 const TypeServices = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
+
+
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+
+  //     setSelectedFile(file);
+  //     setPreviewUrl(URL.createObjectURL(file));
+
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => setPreviewUrl(e.target.result);
+  //     reader.readAsDataURL(file);
+    
+  // };
+
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   setSelectedFile(file);
+
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       setPreview(e.target.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   } else {
+  //     setPreview(null);
+  //   }
+  // };
+
+  const formik = useFormik({
+    initialValues: {
+      desiredDeliveryTime: '',
+      userFiles:[],
+      userDescription: '',
+      // acceptedTerms: false,
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.desiredDeliveryTime      ) {
+        errors.desiredDeliveryTime        = 'زمان تحویل را انتخاب کنید';
+      }
+      if (!values.userFiles.length) {
+        errors.userFiles = 'فایل ها را انتخاب کنید';
+      }
+      if (!values.userDescription      ) {
+        errors.userDescription        = 'توضیحات تکمیلی را وارد کنید';
+      }
+      // if (!values.acceptedTerms) {
+      //   errors.acceptedTerms = 'قوانین و مقررات را باید بپذیرید';
+      // }
+      return errors;
+    },
+    onSubmit: async (values) => {
+      try {
+        
+        const formData = new FormData();
+        formData.append('desiredDeliveryTime', values.desiredDeliveryTime        );
+        formData.append('userDescription', values.userDescription        );
+        formData.append('userFiles', values.userFiles);
+        // formData.append('userFiles', selectedFile );
+        // console.log( values.userFiles)
+        console.log(selectedFile)
+        console.log(preview)
+        // console.log(values.userFiles.length)
+        
+        console.log(values.desiredDeliveryTime)
+        // for (let i = 0; i < values.userFiles.length; i++) {
+        //   formData.append('userFiles', values.userFiles[i]);
+        // }
+        console.log(values)
+        // console.log(values.userFiles)
+          
+            console.log(values.userDescription)
+            console.log(values.desiredDeliveryTime)
+            console.log(values.userFiles)
+            console.log(values.userFiles.length)
+        const responseType = await axios.post('http://chap-chii.ir/net/api/orders/typings/typing-order', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log(values.desiredDeliveryTime)
+        // console.log(values.userFiles)
+        console.log(values.userDescription)
+
+        // setPreviewUrl(URL.createObjectURL(selectedFile));
+
+        // alert('سفارش شما با موفقیت ثبت شد!');
+        console.log(responseType)
+      } catch (error) {
+        setOpen(true);
+        console.error(error);
+        
+      }
+    },
+  });
+
+  const handleFileChange = (event) => {
+    formik.setFieldValue('userFiles',Array.from(event.target.files));
+  };
+
+  
+
+
   const VisuallyHiddenInput1 = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -33,6 +147,9 @@ const TypeServices = () => {
     whiteSpace: "nowrap",
     width: 1,
   });
+
+  
+
 
   return (
     <>
@@ -219,14 +336,27 @@ const TypeServices = () => {
                   </Typography>{" "}
                 </Divider>
               </Box>{" "}
-              <form autoComplete="off" style={{ paddingTop: "15px" }}>
-                <TextField
-                  defaultValue="انتخاب کنید"
-                  select
-                  SelectProps={{
-                    native: true,
-                  }}
-                  label="زمان تحویل"
+              <form autoComplete="off" style={{ paddingTop: "15px" }} onSubmit={formik.handleSubmit}>
+                {/* <TextField
+                defaultValue="انتخاب کنید"
+                select
+                SelectProps={{
+                  native: true,
+                }}
+                label="زمان تحویل"
+                
+                // id="desiredDeliveryTime"
+                name="desiredDeliveryTime"
+                value={formik.values.desiredDeliveryTime
+                }
+                onChange={formik.handleChange}
+                // error={formik.touched.desiredDeliveryTime
+                //   && Boolean(formik.errors.desiredDeliveryTime
+                //   )}
+                // helperText={formik.touched.desiredDeliveryTime
+                //   && formik.errors.desiredDeliveryTime
+                // }  
+                 
                   sx={{
                     minWidth: 1,
                     background: "#FFF",
@@ -235,8 +365,10 @@ const TypeServices = () => {
                     "& .MuiInputBase-root": {
                       fontSize: "14px",
                       borderRadius: "8px",
+                                          
                     },
-                    "& .MuiFormLabel-root": { fontSize: "14px" },
+                    "& .MuiFormLabel-root": { fontSize: "14px", },
+                    "& .MuiInputLabel-root": { transform:"translate(15px, -9px) scale(0.75)" }
                   }}
                 >
                   <option disabled>{"انتخاب کنید"} </option>
@@ -249,7 +381,52 @@ const TypeServices = () => {
                       {input.info}
                     </option>
                   ))}
-                </TextField>
+                </TextField> */}
+                   <TextField
+                      defaultValue="انتخاب کنید"
+                      select
+                      SelectProps={{
+                        native: true,
+                      }}
+                      label="زمان تحویل "
+                      sx={{
+                        minWidth: 1,
+                        background: "#FFF",
+                        color: "#000",
+                        fontSize: "14px",
+                        "& .MuiInputBase-root": {
+                          fontSize: "14px",
+                          borderRadius: "8px",
+                        },
+                        "& .MuiFormLabel-root": { fontSize: "14px" },
+                        "& .MuiInputLabel-root": { transform:"translate(15px, -14px) scale(0.75)", }
+
+                      }}
+                      name="desiredDeliveryTime"
+                      value={formik.values.desiredDeliveryTime
+                      }
+                      onChange={formik.handleChange}
+                      // disabled={formik.values.desiredDeliveryTime==="انتخاب کنید"}
+
+                    >
+                      <option disabled value=""> {"انتخاب کنید"}</option>
+                      {typeServicesInput.map((input, index) => (
+                        <option
+                        
+                          style={{ fontSize: "14px", color: "#000" }}
+                          key={index}
+                          value={input.value}
+                        >
+                          {input.info}
+                        </option>
+                      ))}
+                    </TextField>
+                <Typography sx={{color:"#d32f2f",fontFamily:"YekanBakh",fontWeight:400,fontSize:"15px",mt:"3px",mx:"14px"}}>
+                        {
+                          formik.touched.desiredDeliveryTime
+                          && formik.errors.desiredDeliveryTime
+                        }
+                      </Typography>
 
                 <Box sx={{ pt: "20px" }}>
                   <Box
@@ -285,12 +462,32 @@ const TypeServices = () => {
                       >
                         انتخاب فایل ها
                       </Typography>
-                      <VisuallyHiddenInput1 type="file" multiple accept="*" />
+                      <VisuallyHiddenInput1  name="userFiles" type="file" onChange={handleFileChange} multiple accept="*" />
+                     
                     </Box>
+                    
                   </Box>
+
+                  {/* {selectedFile && (
+        <div>
+          <img src={preview} alt="پیش نمایش فایل" width={100} height={100} />
+        </div>
+      )} */}
+                  <Typography sx={{color:"#d32f2f",fontFamily:"YekanBakh",fontWeight:400,fontSize:"15px",mt:"7px",mx:"14px"}}>
+                        {
+                          formik.touched.userFiles
+                          && formik.errors.userFiles
+                        }
+                      </Typography>
                 </Box>
                 <Box sx={{ mt: "20px" }}>
                   <TextareaAutosize
+                            // id="userDescription"
+                            name="userDescription"
+
+                     value={formik.values.userDescription}
+                     onChange={formik.handleChange}
+                     
                     placeholder="توضیحات تکمیلی برای ارائه به تایپیست"
                     style={{
                       height: "5rem",
@@ -307,7 +504,9 @@ const TypeServices = () => {
                       boxSizing: "border-box",
                     }}
                   />
+                  
                 </Box>
+               
                 <Box sx={{ mt: "20px", textAlign: "left" }}>
                   <Box
                     sx={{
@@ -318,7 +517,7 @@ const TypeServices = () => {
                     }}
                   >
                     <Checkbox
-                      required
+                      // required
                       disableRipple
                       size="10px"
                       sx={{
@@ -356,6 +555,7 @@ const TypeServices = () => {
                 </Box>
                 <Box className="boxBtn" sx={{ textAlign: "right" }}>
                   <Button
+                  type="submit"
                     className="btn"
                     variant="contained"
                     sx={{
@@ -368,6 +568,17 @@ const TypeServices = () => {
                   </Button>
                 </Box>
               </form>
+              <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        <Box sx={{ p: 3 }}>
+          <h2 id="modal-title">خطا</h2>
+          <p id="modal-description">مشکلی در ثبت سفارش شما رخ داده است. لطفا دوباره تلاش کنید.</p>
+        </Box>
+      </Modal>
             </Grid>
           </Grid>
         </Box>

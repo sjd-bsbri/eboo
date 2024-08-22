@@ -1,0 +1,130 @@
+import React, { useState } from 'react';
+import { Button, TextField, Modal, Box, Checkbox, Typography } from '@mui/material';
+import { useFormik } from 'formik';
+import { VisuallyHiddenInput1 } from '@mui/base/TextareaAutosize';
+import { BsPlus } from 'react-icons/bs';
+import axios from 'axios';
+
+const OrderForm = () => {
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+
+  const formik = useFormik({
+    initialValues: {
+      deliveryTime: '',
+      files: [],
+      additionalNotes: '',
+      acceptedTerms: false,
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.deliveryTime) {
+        errors.deliveryTime = 'زمان تحویل را انتخاب کنید';
+      }
+      if (!values.files.length) {
+        errors.files = 'فایل ها را انتخاب کنید';
+      }
+      if (!values.additionalNotes) {
+        errors.additionalNotes = 'توضیحات تکمیلی را وارد کنید';
+      }
+      if (!values.acceptedTerms) {
+        errors.acceptedTerms = 'قوانین و مقررات را باید بپذیرید';
+      }
+      return errors;
+    },
+    onSubmit: async (values) => {
+      try {
+        const formData = new FormData();
+        formData.append('deliveryTime', values.deliveryTime);
+        formData.append('files', values.files);
+        formData.append('additionalNotes', values.additionalNotes);
+
+        await axios.post('/api/orders', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        alert('سفارش شما با موفقیت ثبت شد!');
+      } catch (error) {
+        setOpen(true);
+        console.error(error);
+      }
+    },
+  });
+
+  const handleFileChange = (event) => {
+    formik.setFieldValue('files', event.target.files);
+  };
+
+  return (
+    <div>
+      <h1>ثبت سفارش تایپ جدید</h1>
+
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          id="deliveryTime"
+          label="زمان تحویل"
+          select
+          value={formik.values.deliveryTime}
+          onChange={formik.handleChange}
+          error={formik.touched.deliveryTime && Boolean(formik.errors.deliveryTime)}
+          helperText={formik.touched.deliveryTime && formik.errors.deliveryTime}
+        >
+          <MenuItem value="">انتخاب کنید</MenuItem>
+          <MenuItem value="24">24 ساعت</MenuItem>
+          <MenuItem value="48">48 ساعت</MenuItem>
+          <MenuItem value="72">72 ساعت</MenuItem>
+        </TextField>
+
+        <Box sx={{ pt: '20px' }}>
+          <Box
+            sx={{
+              background: '#FFF',
+              p: '40px 0',
+              border: '1px dashed #ced4da',
+              borderRadius: '10px',
+            }}
+          >
+            <Box
+              component="label"
+              disableRipple
+              sx={{
+                width: 'fit-content',
+                overflow: 'hidden',
+                color: '#007bff',
+                height: '30px',
+                borderRadius: '5px',
+                m: '0 auto',
+                p: '7.5px 15px',
+                fontSize: '15px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                ':hover': { background: '#007bff', color: '#FFf' },
+              }}
+            >
+              <BsPlus style={{ marginBottom: '5px' }} />
+              <Typography
+                sx={{ fontFamily: 'YekanBakh', fontSize: '15px' }}
+              >
+                انتخاب فایل ها
+              </Typography>
+              <VisuallyHiddenInput1
+                type="file"
+                multiple
+                accept="*"
+                onChange={handleFileChange}
+              />
+            </Box>
+          </Box>
+        </Box>
+
+        <TextField
+          id="additionalNotes"
+          label="توضیحات تکمیلی برای ارائه به تایپیست"
+          multiline
+          rows={4}
+          value={formik.values.additionalNotes}
+          onChange={formik.handleChange}

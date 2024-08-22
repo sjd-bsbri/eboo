@@ -165,11 +165,4 @@ const BrainDescriptions = () => {
 };
 
 export default BrainDescriptions;
-// LOADING
 
-{
-  /* <>
-<Typography textAlign="center"> 🌟این قسمت به زودی بارگذاری میشه ... انشاالله🌟 </Typography>
-<Box className="loader"></Box>
-</> */
-}
