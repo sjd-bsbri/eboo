@@ -215,6 +215,9 @@ const LoginButtonHeader = () => {
       phoneNumber: "",
     },
     validationSchema: loginValidationSchema,
+    // comented fron here👇🏻
+
+
     onSubmit: async (values) => {
       
       try {
@@ -237,10 +240,12 @@ const LoginButtonHeader = () => {
               
             console.error('"تعداد درخواستها از حد مجاز روزانه عبور کرده است !"', error);
             // alert('خطایی در ارسال کد تایید رخ داد');
-            toast.error("تعداد درخواستها از حد مجاز روزانه عبور کرده است!", { position: 'top-right', style:{fontFamily:"vazir",fontSize:"12px",direction:"rtl"} });
+            // toast.error("تعداد درخواستها از حد مجاز روزانه عبور کرده است!", { position: 'top-right', style:{fontFamily:"vazir",fontSize:"12px",direction:"rtl"} });
+            toast.error("به دلیل قطع بودن سرویس ارسال پیام از سمت سرور ، امکان ارسال پیام وجود ندارد !", { position: 'top-right', style:{fontFamily:"vazir",fontSize:"12px",direction:"rtl"} });
 
           }
       } 
+// comented to here☝🏻
     
     }
   )
