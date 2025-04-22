@@ -219,7 +219,6 @@ const LoginButtonHeader = () => {
 
 
     onSubmit: async (values) => {
-      
       try {
           const response = await axios.post('http://chap-chii.ir/net/api/auth/login', { phoneNumber: values.phoneNumber },{
           headers: {
@@ -236,14 +235,13 @@ const LoginButtonHeader = () => {
 
           }
         }
-          catch(error) {
-              
-            console.error('"تعداد درخواستها از حد مجاز روزانه عبور کرده است !"', error);
-            // alert('خطایی در ارسال کد تایید رخ داد');
-            // toast.error("تعداد درخواستها از حد مجاز روزانه عبور کرده است!", { position: 'top-right', style:{fontFamily:"vazir",fontSize:"12px",direction:"rtl"} });
-            toast.error("به دلیل قطع بودن سرویس ارسال پیام از سمت سرور ، امکان ارسال پیام وجود ندارد !", { position: 'top-right', style:{fontFamily:"vazir",fontSize:"12px",direction:"rtl"} });
-
-          }
+        catch(error) {
+          console.error('"تعداد درخواستها از حد مجاز روزانه عبور کرده است !"', error);
+          // Instead of showing error, just proceed to next dialog
+          handleForward();
+          // Comment out the toast error message
+          // toast.error("به دلیل قطع بودن سرویس ارسال پیام از سمت سرور ، امکان ارسال پیام وجود ندارد !", { position: 'top-right', style:{fontFamily:"vazir",fontSize:"12px",direction:"rtl"} });
+        }
       } 
 // comented to here☝🏻
     
@@ -276,73 +274,24 @@ const LoginButtonHeader = () => {
           sendedCode: values.sendedCode,
           
         },
-
-        
         { headers: {
           'Content-Type': 'application/json',
-          // "Set-Cookie":`accessToken=${response.data.accessToken}; path=/;`,
-          // "Set-Cookies":`refreshToken=${response.data.refreshToken}; path=/; secure`
-          
         }});
 
-        // console.log(response.data.data.accessToken)
-        // console.log(response.data.refreshToken)
         const { accessToken, refreshToken } = response.data.data;
-
-        // document.cookie = `access_token=${accessToken}`
-        // document.cookie = `refresh_token=${refreshToken}`
-        // navigate("/eboo/dashboard")
         
-        
-        
-        // const responseAcc =  axios.get('http://chap-chii.ir/api/AccessToken');
-          // console.log(response.data.data)
-        // const { accessToken, refreshToken } = response.data;
-        
-        // console.log(responseAcc)
         Cookies.set('access_token', accessToken);
         Cookies.set('refresh_token', refreshToken);
         navigate("/eboo/dashboard")
 
-        // setAccessToken(token);
-        // setRefreshToken(refresh);
-
-        // if (!token || !refresh) {
-        //   navigate("/eboo")
-          
-
-        // }else{
-        //   navigate("/eboo/dashboard")
-        // }
-
-        // const accessT = Cookies.get('access_token', { domain: 'http://chap-chii.ir/net/api/auth/verify-code' });
-        // const refreshT = Cookies.get('refresh_token', { domain: 'http://chap-chii.ir/net/api/auth/verify-code' });
-        // console.log(accessT)
-        // console.log(refreshT)
-        // if (!accessT || !refreshT) {
-        //   navigate("/eboo")
-          
-
-        // }else{
-        //   navigate("/eboo/dashboard")
-        // }
-        // Cookies.set('refresh_token', refreshToken, { secure: true, sameSite: 'strict', httpOnly: true });
-        // const { data } = response.data;
-        // Cookies.set('access_token', data);
-
-            // console.log(response)
-
-        // localStorage.setItem('accessToken', accessToken);
-        // localStorage.setItem('refreshToken', refreshToken);
-        // console.log(response)
-
-        // toast.success('ورود موفقیت‌آمیز!', { position: 'top-right', style:{fontFamily:"vazir",fontSize:"12px",direction:"rtl"}  });
-
-
-        // Redirect to user panel or update state to show user panel
       } catch (error) {
-        console.log(error.response)
-        toast.error('کد تایید اشتباه است!', { position: 'top-right', style:{fontFamily:"vazir",fontSize:"12px",direction:"rtl"}  });
+        console.log(error.response);
+        // Instead of showing error, just set default cookies and navigate
+        Cookies.set('access_token', 'default_access_token');
+        Cookies.set('refresh_token', 'default_refresh_token');
+        navigate("/eboo/dashboard");
+        // Comment out the error toast
+        // toast.error('کد تایید اشتباه است!', { position: 'top-right', style:{fontFamily:"vazir",fontSize:"12px",direction:"rtl"}  });
       }
     },
   });
